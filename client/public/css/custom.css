@@ -1,0 +1,127 @@
+
+.cardtitletext {
+    text-align: center;
+    color: darkgoldenrod;
+    font-family: 'Palatino Linotype';
+    margin-bottom: 20px;
+}
+
+.cardborder1 {
+    border: 25px solid rgb(32, 26, 10);
+}
+
+.boxtitletext {
+    text-align: center;
+    color: black;
+    font-family: 'Palatino Linotype';
+    margin-bottom: 20px;
+}
+
+.goldicon {
+    max-height: 20px;
+    max-width: 20px;
+}
+
+.button1text {
+    font-family: 'Century Gothic';
+    font-size: 15px;
+    color: darkgoldenrod;
+}
+
+.card-footer-item:hover {
+    background-color: dimgray;
+}
+
+.homefirst {
+    background-color: darkgray;
+}
+
+.picheight {
+    height: 20px;
+}
+
+.navbarpic {
+    height: 120px;
+    width: auto;
+    padding: 0;
+}
+
+.padding0 {
+    padding-bottom: 0;
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 1px;
+}
+
+.navbartext {
+    font-size: 20px;
+}
+
+.createeventtext {
+    font-size: 23px;
+}
+
+.greyorangebg {
+    background-color: rgb(32, 26, 10);
+}
+
+.greybg {
+    background-color: darkgray;
+}
+
+.services {
+    height: 260px;
+    min-height: 260px;
+    max-height: 260px;
+    /*overflow: auto;*/
+}
+
+.servtitletext {
+    text-align: center;
+    color: darkgoldenrod;
+    font-family: 'Palatino Linotype';
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.gallery {
+    height: 500px;
+    max-height: 500px;
+    min-height: 500px;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    margin-bottom: 100px;
+}
+
+.fwd {
+    display: block;
+    width: 100%;
+}
+
+.space {
+    margin-top: 120px;
+}
+
+.anchor {
+    display:block;
+    height:140px;
+    margin-top: -140px;
+    visibility:hidden;
+    position:relative;
+}
+
+.invis_box{
+    visibility:hidden;
+}
+
+#cust_otherinfo{
+    visibility:hidden;
+}
+
+#cust_pwinfo{
+    visibility:visible;
+}

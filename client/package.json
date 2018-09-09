@@ -1,0 +1,27 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://localhost:8080/",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bulma-extensions": "^2.2.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-grid-gallery": "^0.5.1",
+    "react-image-gallery": "^0.8.10",
+    "react-modal": "^3.5.1",
+    "react-password-mask": "^3.3.1",
+    "react-power-select": "^1.0.0-beta.14",
+    "react-router-dom": "^4.3.1",
+    "react-router-hash-link": "^1.2.0",
+    "react-scripts": "1.1.4",
+    "save": "^2.3.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
