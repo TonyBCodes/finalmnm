@@ -134,7 +134,7 @@ class FAQ extends Component {
                                                 Where can a Mix And Ming event be hosted?
                                         </th>
                                             <th>
-                                                A Mix And Ming event can be hosted at or in any location or venue where alcoholic drinks can be prepared and consumed.  The host is responsible for confirming rules, regulations and laws that pertain to the preparation and consumption of alcoholic bevarages at the desired venue.
+                                                A Mix And Ming event can be hosted at or in any location or venue where alcoholic drinks can be prepared and consumed.  The host is responsible for confirming all rules, regulations and laws that pertain to the preparation and consumption of alcoholic bevarages at the desired venue.  Mix and Mingle is not liable for violation of any applicable federal, state or local laws associated with the preparation or consumption of alcohol.
                                         </th>
                                         </tr>
                                         <tr>
@@ -222,7 +222,7 @@ class FAQ extends Component {
                                                 What additional items are required to host a Mix And Ming event?
                                         </th>
                                             <th>
-                                                Prepare the venue with a table for participants, water, ice and light refreshments.  The bartender will need to be situated in a location where they can be seen and heard by all participants.
+                                                The host will need to prepare the venue with a table for participants, water, ice and light refreshments and also be responsible for post event clean up.  The bartender will need to be situated in a location where they can be seen and heard by all participants.
                                         </th>
                                         </tr>
                                         <tr>
@@ -246,7 +246,7 @@ class FAQ extends Component {
                                                 Who is my contact the date of my event?
                                         </th>
                                             <th>
-                                                The bartender is your primary contact the day of the event. For customized events, one of our representatives will contact the host to confirm details.  For all events, your bartender will contact the host 1 week prior to the event.
+                                                The bartender is your primary contact the day of the event and will contact the host by email and phone one week prior to the event. For customized events, one of our representatives will contact the host to confirm details.  For all events, your bartender will contact the host 1 week prior to the event.
                                         </th>
                                         </tr>
                                         <tr>
@@ -286,7 +286,7 @@ class FAQ extends Component {
                                                 What happens if the event is running late?
                                         </th>
                                             <th>
-                                                Please contact your bartender as soon as possible if your event is running late.  The rate for a standard event is based on a 2 hour event.  Additional charges may apply for late starts in excess of 30 minutes.
+                                                Please contact your bartender as soon as possible if your event is running late.  The rate for a standard event is based on a 2 hour event.  Late starts in excess of 30 minutes are subject to $15 per 30 minutes payable directly to the bartender before the bartender starts instruction.
                                         </th>
                                         </tr>
                                         <tr>

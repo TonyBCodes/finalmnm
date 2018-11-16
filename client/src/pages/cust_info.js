@@ -13,12 +13,10 @@ class CustInfo extends Component {
         addr1: "",
         addr2: "",
         city: "",
-        stateval: "",
+        state: "",
         zip: "",
         phone: "",
-        dob: "",
-        message: "",
-        isHidden: true
+        dob: ""
     }
 
     renderEventInfoRedirect = () => {
@@ -35,65 +33,90 @@ class CustInfo extends Component {
         });
     };
 
-    handleStateInputChange = event => {
-        console.log(event);
-        console.log(document.getElementById("state_selector"));
-        console.log(document.getElementById("selected_state"));
+    handleChange = event => {
+        this.setState({ state: event.target.value });
     }
 
-        pwcheck = event => {
-            event.preventDefault();
-            console.log("pwcheck");
-            console.log(this.state.password);
-            console.log(this.state.conf_pw);
-            //enforce upper, lower, number but no special characters
-            const pwformat = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,16}$/;
-            if (this.state.password !== this.state.conf_pw) {
-                document.getElementById("pw_msg").style.visibility = "visible";
-                document.getElementById("pw_msg").textContent = "The passwords do not match. Password must be entered twice and be identical.";
-                setTimeout(function () {
-                    document.getElementById("pw_msg").style.visibility = "hidden";
-                }, 4000);
-                return;
-            }
-            if (this.state.password.length < 8 || this.state.password.length > 16) {
-                document.getElementById("pw_msg").style.visibility = "visible";
-                document.getElementById("pw_msg").textContent = "Password must be at least 8 characters long and no longer than 16 characters long.";
-                setTimeout(function () {
-                    document.getElementById("pw_msg").style.visibility = "hidden";
-                }, 4000);
-                return;
-            }
-            if (!this.state.password.match(pwformat)) {
-                document.getElementById("pw_msg").style.visibility = "visible";
-                document.getElementById("pw_msg").textContent = "Password does not meet the required format. Password must be 8-16 characters long, contain upper case letters, lower case letters and numbers, and must not contain spaces, special characters, or emoji.";
-                setTimeout(function () {
-                    document.getElementById("pw_msg").style.visibility = "hidden";
-                }, 6000);
-                return;
-            }
-
+    pwcheck = event => {
+        event.preventDefault();
+        console.log("pwcheck");
+        console.log(this.state.password);
+        console.log(this.state.conf_pw);
+        //enforce upper, lower, number but no special characters
+        const pwformat = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,16}$/;
+        if (this.state.password !== this.state.conf_pw) {
             document.getElementById("pw_msg").style.visibility = "visible";
-            document.getElementById("pw_msg").textContent = "Password OK";
-            document.getElementById("cust_pwinfo").style.visibility = "hidden";
-            document.getElementById("cust_pwinfo").style.display = "none";
-            document.getElementById("cust_otherinfo").style.visibility = "visible";
+            document.getElementById("pw_msg").textContent = "The passwords do not match. Password must be entered twice and be identical.";
+            setTimeout(function () {
+                document.getElementById("pw_msg").style.visibility = "hidden";
+            }, 4000);
             return;
         }
+        if (this.state.password.length < 8 || this.state.password.length > 16) {
+            document.getElementById("pw_msg").style.visibility = "visible";
+            document.getElementById("pw_msg").textContent = "Password must be at least 8 characters long and no longer than 16 characters long.";
+            setTimeout(function () {
+                document.getElementById("pw_msg").style.visibility = "hidden";
+            }, 4000);
+            return;
+        }
+        if (!this.state.password.match(pwformat)) {
+            document.getElementById("pw_msg").style.visibility = "visible";
+            document.getElementById("pw_msg").textContent = "Password does not meet the required format. Password must be 8-16 characters long, contain upper case letters, lower case letters and numbers, and must not contain spaces, special characters, or emoji.";
+            setTimeout(function () {
+                document.getElementById("pw_msg").style.visibility = "hidden";
+            }, 7000);
+            return;
+        }
+
+        document.getElementById("pw_msg").style.visibility = "visible";
+        document.getElementById("pw_msg").textContent = "Password OK";
+        document.getElementById("cust_pwinfo").style.visibility = "hidden";
+        document.getElementById("cust_pwinfo").style.display = "none";
+        document.getElementById("cust_otherinfo").style.visibility = "visible";
+        return;
+    }
+
+    info_ok = () => {
+        if (this.state.firstname === "" ||
+            this.state.lastname === "" ||
+            this.state.addr1 === "" ||
+            this.state.city === "" ||
+            this.state.state === "" ||
+            this.state.zip === "" ||
+            this.state.phone === "" ||
+            this.state.dob === "") {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
 
     handleSubmit = event => {
         event.preventDefault();
 
-        console.log('handling form submit...');
+        if (this.info_ok()) {
 
-        axios.post("/api/signup", this.state)
-            .then((res) => {
-                console.log(res);
-                this.renderEventInfoRedirect();
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+            console.log('handling form submit...');
+
+            axios.post("/api/signup", this.state)
+                .then((res) => {
+                    console.log(res);
+                    this.renderEventInfoRedirect();
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+        else {
+            document.getElementById("info_msg").style.visibility = "visible";
+            document.getElementById("info_msg").textContent = "The following must be completed: First Name, Last Name, Address Line 1, City, State / Province, Zip Postal Code, Phone Number and Date of Birth";
+            setTimeout(function () {
+                document.getElementById("info_msg").style.visibility = "hidden";
+            }, 10000);
+            return;
+        }
     };
 
 
@@ -186,8 +209,9 @@ class CustInfo extends Component {
                         <div className="column">
                             <label className="label">State / Province</label>
                             <div className="control">
-                                <div id="selected_state" className="select tooltip is-tooltip-right is-tooltip-multiline" data-tooltip="Currently serving DE, NJ & PA within 30 miles of Philadelphia.  Additional areas coming soon." name="stateval" onChange={this.handleStateInputChange} value={this.state.stateval}>
-                                    <select id="state_selector">
+                                <div className="select tooltip is-tooltip-right is-tooltip-multiline" data-tooltip="Currently serving DE, NJ & PA within 30 miles of Philadelphia.  Additional areas coming soon." value={this.state.state} onChange={this.handleChange}>
+                                    <select>
+                                        <option value="" />
                                         <option value="DE">DE</option>
                                         <option value="NJ">NJ</option>
                                         <option value="PA">PA</option>
@@ -219,6 +243,11 @@ class CustInfo extends Component {
                     </div>
 
                     <a className="button" type="submit" onClick={this.handleSubmit}> Save Your Information </a>
+                </div>
+                <div className="columns">
+                    <div className="column">
+                        <div id="info_msg" className="box invis_box" />
+                    </div>
                 </div>
 
             </div>

@@ -27,7 +27,7 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
         },
         cust_password: {
-            type: Sequelize.STRING(16),
+            type: Sequelize.STRING(60),
             allowNull: false
         },
         cust_pw_update_code: {

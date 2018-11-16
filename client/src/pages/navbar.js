@@ -44,7 +44,7 @@ const Navbar = () => (
                     <a className="navbar-item navbartext greybg" href="/cust_start">
                         Login
                     </a>
-                    <a className="navbar-item navbartext greybg" href="#">
+                    <a className="navbar-item navbartext greybg" href="/api/logout">
                         Logout
                     </a>
                 </div>

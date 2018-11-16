@@ -1,6 +1,10 @@
 //Require Express and Router
 //const express = require('express');
 //const app = express.Router();
+
+var bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 // Requiring our models and passport as we've configured it
 
 module.exports = function (app, passport, db) {
@@ -17,10 +21,13 @@ module.exports = function (app, passport, db) {
     // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
     // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
     // otherwise send back an error
+
     app.post("/api/signup", function (req, res) {
         console.log(req.body);
+        const salt = bcrypt.genSaltSync(saltRounds);
+        const hash = bcrypt.hashSync(req.body.password, salt);
         db.Customer.create({
-            cust_password: req.body.password,
+            cust_password: hash,
             cust_pw_update_code: null,
             cust_pw_update_time: null,
             cust_email: req.body.email,
@@ -45,6 +52,7 @@ module.exports = function (app, passport, db) {
     });
 
 
+
     // Route for logging customer in
     app.post("/api/login", passport.authenticate("local", { failureRedirect: '/login/true' }), function (req, res) {
         console.log("Req  ", req.body);
@@ -53,10 +61,32 @@ module.exports = function (app, passport, db) {
         res.send(true);
     });
 
+    // Route for logging customer in
+    //app.post('/api/login', passport.authenticate('local', {
+    //    successRedirect: '/event_info/:email',
+    //    failureRedirect: '/cust_start'
+    //}));
+    //app.post("/api/login", function (passport.authenticate("local", { failureRedirect: '/login/true' }), function (req, res) {
+    //    console.log("Req  ", req.body);
+    //    console.log("Res   ", res.body);
+    //    console.log("Inside of Login");
+    //    res.send(true);
+    //});
+
+    // Route for logging customer in
+    //app.post("/api/login", passport.authenticate("local", { failureRedirect: '/login/true' }), function (req, res) {
+    //    console.log("Req  ", req.body);
+    //    console.log("Res   ", res.body);
+    //    console.log("Inside of Login");
+    //    res.send(true);
+    //});
+
     // Route for logging user out
-    app.get("/logout", function (req, res) {
-        req.logout();
-        res.redirect("/");
+    app.get("/api/logout", function (req, res) {
+        req.logout(), function () {
+            console.log(test);
+            return res.redirect("/");
+        };
     });
 
     // Route for getting userid of logged in customer

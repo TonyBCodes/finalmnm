@@ -13,7 +13,7 @@ import ImageGallery from 'react-image-gallery';
 class EventInfo extends Component {
     state = {
         event_saved: false,
-        eventid:"",
+        eventid: "",
         email: null,
         cust_id: null,
         event_name: "",
@@ -23,22 +23,22 @@ class EventInfo extends Component {
         selected_drink: "",
         drink1_id: "",
         drink1_name: "Drink 1",
-        drink1_pic: "/img/stock-photo-barman-show-bartender-pours-alcoholic-cocktails-439101094.jpg",
+        drink1_pic: "/img/pexels-photo-110472-thumb.jpg",
         drink2_id: "",
         drink2_name: "Drink 2",
-        drink2_pic: "/img/stock-photo-barman-show-bartender-pours-alcoholic-cocktails-439101094.jpg",
+        drink2_pic: "/img/pexels-photo-110472-thumb.jpg",
         drink3_id: "",
         drink3_name: "Drink 3",
-        drink3_pic: "/img/stock-photo-barman-show-bartender-pours-alcoholic-cocktails-439101094.jpg",
+        drink3_pic: "/img/pexels-photo-110472-thumb.jpg",
         drink4_id: "",
         drink4_name: "Drink 4",
-        drink4_pic: "/img/stock-photo-barman-show-bartender-pours-alcoholic-cocktails-439101094.jpg",
+        drink4_pic: "/img/pexels-photo-110472-thumb.jpg",
         drink5_id: "",
         drink5_name: "Drink 5",
-        drink5_pic: "/img/stock-photo-barman-show-bartender-pours-alcoholic-cocktails-439101094.jpg",
+        drink5_pic: "/img/pexels-photo-110472-thumb.jpg",
         drink6_id: "",
         drink6_name: "Drink 6",
-        drink6_pic: "/img/stock-photo-barman-show-bartender-pours-alcoholic-cocktails-439101094.jpg",
+        drink6_pic: "/img/pexels-photo-110472-thumb.jpg",
         addon1: "",
         addon1_quant: 0,
         addon2: "",
@@ -105,8 +105,8 @@ class EventInfo extends Component {
 
     init_image = () => {
         var IMAGES = [{
-            original: "/img/depositphotos_18605195-stock-photo-several-glasses-of-different-drinks.jpg",
-            thumbnail: "/img/depositphotos_18605195-stock-photo-several-glasses-of-different-drinks.jpg",
+            original: "/img/pexels-photo-110472.jpeg",
+            thumbnail: "/img/pexels-photo-110472.jpeg",
             thumbnailWidth: 320,
             thumbnailHeight: 320,
         }];
@@ -118,6 +118,11 @@ class EventInfo extends Component {
 
     handleOpenModal = this.handleOpenModal.bind(this);
     handleCloseModal = this.handleCloseModal.bind(this);
+
+    handleOpenBulmaModal = () => {
+        document.getElementById("bulmod").setAttribute("class", "is-active");
+        document.documentElement.setAttribute("class", "is-clipped");
+    }
 
     componentWillMount() {
         if (this.props.match.params.email) {
@@ -257,7 +262,7 @@ class EventInfo extends Component {
         axios.get("/api/cust_info/" + this.state.email)
             .then(res => {
                 console.log(res.data);
-                let cust_inf=res.data
+                let cust_inf = res.data
                 let event_data = {
                     name: this.state.event_name,
                     date: this.state.event_date,
@@ -290,7 +295,7 @@ class EventInfo extends Component {
                         this.setState(
                             {
                                 event_saved: true,
-                                eventid:resp.data.ev_id
+                                eventid: resp.data.ev_id
                             }
                         );
                     })
@@ -323,187 +328,259 @@ class EventInfo extends Component {
         else {
 
             return (
-                <div className="container-fluid cust-about max1024w">
-                    <div className="cust-about-us marg-lg-t140 marg-lg-b140 marg-sm-b50 marg-sm-t50">
-                        <div className="col-lg-12 col-md-12">
-                            <div className="cust-about-form">
-                                <h3><i>Event Information</i></h3>
-                                <div className="row">
-                                    <h5>Logged in as: {this.state.email}</h5>
+                <div>
+                    <div className="columns">
+                        <div className="column">
+                            <h3><i>Event Information</i></h3>
+                        </div>
+                    </div>
+                    <div className="columns">
+                        <div className="column">
+                            <h5>Logged in as: {this.state.email}</h5>
+                        </div>
+                        <br />
+                        <div className="column">
+                            <h5>Event specifics must be finalized and event payment must be completed 14 days before event date.</h5>
+                        </div>
+                    </div>
+
+                    <div className="columns">
+                        <div className="column">
+                            <div className="field">
+                                <label className="label">Event Name</label>
+                                <div className="control">
+                                    <input className="input" type="text" name="event_name" onChange={this.handleInputChange} placeholder="Event Name" />
                                 </div>
-                                <br />
-                                <div className="row">
-                                    <h5>Event specifics must be finalized and event payment must be completed 14 days before event date.</h5>
-                                </div>
-                                <div>
-                                    <form>
-                                        <div className="row">
-                                            <input type="text" placeholder='Event Name' name="event_name" onChange={this.handleInputChange} className="col-md-10 pad-lg-0 " />
-                                        </div>
-                                        <br />
-                                        <div className="row">
-                                            <input type="date" placeholder='Event Date' name="event_date" onChange={this.handleInputChange} className="col-md-5 pad-lg-0 " />
-                                            <input type="time" min="11:00" max="21:00" placeholder='Event Strart Time' name="event_time" onChange={this.handleInputChange} className="col-md-5 pad-lg-0 " />
-                                            <input type="text" placeholder='Number of Participants' name="event_pax" onChange={this.handleInputChange} className="col-md-5 pad-lg-0 " />
-                                        </div>
-                                        <div className="row">
-                                            <div className='col-lg-12'>
-                                                <h3>Select Six Cocktails</h3>
-                                            </div>
-                                        </div>
-                                        <div className="row colorblack">
-                                            <div className="col-md-4 ">
-                                                <div className=" wpc-upcom">
-                                                    <div className="wpc-upcoming-head"><img src={this.state.drink1_pic} alt="" />
-                                                    </div>
-                                                    <div className="wpc-upcoming-body">
-                                                        <span className='wpc-upcoming-date'>Select Drink 1</span>
-                                                        <h6>{this.state.drink1_name}</h6>
-                                                        <a href="" onClick={this.handleOpenModal} id="drink1" className="wpc-upcoming-reg">Choose Drink</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-4 ">
-                                                <div className=" wpc-upcom">
-                                                    <div className="wpc-upcoming-head"><img src={this.state.drink2_pic} alt="" />
-                                                    </div>
-                                                    <div className="wpc-upcoming-body">
-                                                        <span className='wpc-upcoming-date'>Select Drink 2</span>
-                                                        <h6>{this.state.drink2_name}</h6>
-                                                        <a href="" onClick={this.handleOpenModal} id="drink2" className="wpc-upcoming-reg">Choose Drink</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-4 ">
-                                                <div className=" wpc-upcom">
-                                                    <div className="wpc-upcoming-head"><img src={this.state.drink3_pic} alt="" />
-                                                    </div>
-                                                    <div className="wpc-upcoming-body">
-                                                        <span className='wpc-upcoming-date'>Select Drink 3</span>
-                                                        <h6>{this.state.drink3_name}</h6>
-                                                        <a href="" onClick={this.handleOpenModal} id="drink3" className="wpc-upcoming-reg">Choose Drink</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="row colorblack">
-                                            <div className="col-md-4 ">
-                                                <div className=" wpc-upcom">
-                                                    <div className="wpc-upcoming-head"><img src={this.state.drink4_pic} alt="" />
-                                                    </div>
-                                                    <div className="wpc-upcoming-body">
-                                                        <span className='wpc-upcoming-date'>Select Drink 4</span>
-                                                        <h6>{this.state.drink4_name}</h6>
-                                                        <a href="" onClick={this.handleOpenModal} id="drink4" className="wpc-upcoming-reg">Choose Drink</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-4 ">
-                                                <div className=" wpc-upcom">
-                                                    <div className="wpc-upcoming-head"><img src={this.state.drink5_pic} alt="" />
-                                                    </div>
-                                                    <div className="wpc-upcoming-body">
-                                                        <span className='wpc-upcoming-date'>Select Drink 5</span>
-                                                        <h6>{this.state.drink5_name}</h6>
-                                                        <a href="" onClick={this.handleOpenModal} id="drink5" className="wpc-upcoming-reg">Choose Drink</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-4 ">
-                                                <div className=" wpc-upcom">
-                                                    <div className="wpc-upcoming-head"><img src={this.state.drink6_pic} alt="" />
-                                                    </div>
-                                                    <div className="wpc-upcoming-body">
-                                                        <span className='wpc-upcoming-date'>Select Drink 6</span>
-                                                        <h6>{this.state.drink6_name}</h6>
-                                                        <a href="" onClick={this.handleOpenModal} id="drink6" className="wpc-upcoming-reg">Choose Drink</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <br />
-                                        <button id="saveevent" onClick={this.save_event}>Save Event Information</button>
-                                        <br />
-                                        {!this.state.isHidden && <textarea id="cust_info_msg">Customer Info Message</textarea>}
-                                    </form>
+                            </div>
+                            <div className="field">
+                                <label className="label">Number of Participants</label>
+                                <div className="control">
+                                    <input className="input" type="text" name="event_pax" onChange={this.handleInputChange} placeholder="Number of Participants" />
                                 </div>
                             </div>
                         </div>
-                    </div >
-                    <ReactModal
-                        isOpen={this.state.showModal}
-                        contentLabel="onRequestClose Example"
-                        onRequestClose={this.handleCloseModal}
-                        className="eventModal"
-                        overlayClassName=""
-                    >
-                        <div className="cust-about-form" id="drinkmodal">
-                            <h3>Search by name or ingredient</h3>
-                            <div className="row rowcenter">
-                                <div className="col-md-4 ">
-                                    <h2>Name Search</h2>
+                    </div>
+
+                    <div className="columns">
+                        <div className="column">
+                            <div className="field">
+                                <label className="label">Event Date</label>
+                                <div className="control">
+                                    <input className="input" type="date" name="event_date" onChange={this.handleInputChange} placeholder="Event Date" />
                                 </div>
                             </div>
-                            <div className="row rowcenter">
-                                <div className="col-md-1 " />
-                                <div className="col-md-4 ">
-                                    <div className="row">
-                                        <input type="text" name="drinknamesearch" onChange={this.handleInputChange} placeholder='Drink Name' value={this.state.drinknamesearch} className="col-md-10 pad-lg-0 " />
-                                        <div className="row">
-                                            <div className="col-sm-12 text-center">
-                                                <a href="" id="namesearch" onClick={this.name_search} className="wpc-upcoming-reg buttonmargin">Search</a>
-                                                <a href="" id="nameclear" onClick={this.name_clear} className="wpc-upcoming-reg buttonmargin">Clear</a>
-                                            </div>
-                                        </div>
+                        </div>
+                        <div className="column">
+                            <div className="field">
+                                <label className="label">Event Start Time</label>
+                                <div className="control">
+                                    <input className="input" type="time" min="11:00" max="21:00" name="event_start" onChange={this.handleInputChange} placeholder="Event Start Time" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                                        <div className="row rowcenter">
-                                            <div className="col-md-4 ">
-                                                <h2>Ingredient Search</h2>
-                                            </div>
-                                        </div>
-                                        <div className="demo">
-                                            <PowerSelect
-                                                options={this.state.option_list}
-                                                selected={this.state.selectedOption}
-                                                onChange={this.handleChange}
-                                                placeholder="Click for options"
-                                            />
-                                        </div>
-                                        <div className="row">
-                                            <div className="col-sm-12 text-center">
-                                                <a href="" id="ingsearch" onClick={this.ing_search} className="wpc-upcoming-reg buttonmargin ">Search</a>
-                                                <a href="" id="ingclear" onClick={this.ing_clear} className="wpc-upcoming-reg buttonmargin">Clear</a>
-                                            </div>
-                                        </div>
+                    <div className="columns">
+                        <div className="column">
+                            <h3><b>Select Six (6) Cocktails</b></h3>
+                        </div>
+                    </div>
+
+                    <div className="tile is-ancestor">
+                        <div className="tile is-vertical">
+                            <div className="tile">
+                                <div className="tile is-parent is-vertical">
+                                    <article className="tile is-child notification">
+                                        <figure className="image is-120x120">
+                                            <img src={this.state.drink1_pic} alt="Placeholder image" />
+                                        </figure>
+                                        <p className="servtitletext">Select Drink 1</p>
+                                        <p id="d1name">{this.state.drink1_name} </p>
+                                        <a className="button" onClick={this.handleOpenModal} id="drink1">
+                                            <span>
+                                                <img className="image is-24x24" src="/img/favicona.png" alt="Placeholder image" />
+                                            </span>
+                                            <span>
+                                                <p>Choose / Change Drink</p>
+                                            </span>
+                                        </a>
+                                    </article>
+                                    <article className="tile is-child notification">
+                                        <figure className="image is-120x120">
+                                            <img src={this.state.drink2_pic} alt="Placeholder image" />
+                                        </figure>
+                                        <p className="servtitletext">Select Drink 2</p>
+                                        <p id="d1name">{this.state.drink2_name} </p>
+                                        <a className="button" onClick={this.handleOpenModal} id="drink1">
+                                            <span>
+                                                <img className="image is-24x24" src="/img/favicona.png" alt="Placeholder image" />
+                                            </span>
+                                            <span>
+                                                <p>Choose / Change Drink</p>
+                                            </span>
+                                        </a>
+                                    </article>
+                                </div>
+                                <div className="tile is-parent is-vertical">
+                                    <article className="tile is-child notification">
+                                        <figure className="image is-120x120">
+                                            <img src={this.state.drink3_pic} alt="Placeholder image" />
+                                        </figure>
+                                        <p className="servtitletext">Select Drink 3</p>
+                                        <p id="d1name">{this.state.drink3_name} </p>
+                                        <a className="button" onClick={this.handleOpenModal} id="drink1">
+                                            <span>
+                                                <img className="image is-24x24" src="/img/favicona.png" alt="Placeholder image" />
+                                            </span>
+                                            <span>
+                                                <p>Choose / Change Drink</p>
+                                            </span>
+                                        </a>
+                                    </article>
+                                    <article className="tile is-child notification">
+                                        <figure className="image is-120x120">
+                                            <img src={this.state.drink4_pic} alt="Placeholder image" />
+                                        </figure>
+                                        <p className="servtitletext">Select Drink 4</p>
+                                        <p id="d1name">{this.state.drink4_name} </p>
+                                        <a className="button" onClick={this.handleOpenModal} id="drink1">
+                                            <span>
+                                                <img className="image is-24x24" src="/img/favicona.png" alt="Placeholder image" />
+                                            </span>
+                                            <span>
+                                                <p>Choose / Change Drink</p>
+                                            </span>
+                                        </a>
+                                    </article>
+                                </div>
+                                <div className="tile is-parent is-vertical">
+                                    <article className="tile is-child notification">
+                                        <figure className="image is-120x120">
+                                            <img src={this.state.drink5_pic} alt="Placeholder image" />
+                                        </figure>
+                                        <p className="servtitletext">Select Drink 5</p>
+                                        <p id="d1name">{this.state.drink5_name} </p>
+                                        <a className="button" onClick={this.handleOpenModal} id="drink1">
+                                            <span>
+                                                <img className="image is-24x24" src="/img/favicona.png" alt="Placeholder image" />
+                                            </span>
+                                            <span>
+                                                <p>Choose / Change Drink</p>
+                                            </span>
+                                        </a>
+                                    </article>
+                                    <article className="tile is-child notification">
+                                        <figure className="image is-120x120">
+                                            <img src={this.state.drink6_pic} alt="Placeholder image" />
+                                        </figure>
+                                        <p className="servtitletext">Select Drink 6</p>
+                                        <p id="d1name">{this.state.drink6_name} </p>
+                                        <a className="button" onClick={this.handleOpenBulmaModal} id="drink1">
+                                            <span>
+                                                <img className="image is-24x24" src="/img/favicona.png" alt="Placeholder image" />
+                                            </span>
+                                            <span>
+                                                <p>Choose / Change Drink</p>
+                                            </span>
+                                        </a>
+
+                                    </article>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <br />
+                    <a className="button" id="saveevent" onClick={this.save_event}>Save Event Information</a>
+                    <br />
+
+                    <div className="modal" id="bulmod">
+                        <div className="modal-background" />
+                        <div className="modal-content">
+                            Test
+                        </div>
+                        <button className="modal-close is-large" aria-label="close">Close</button>
+                    </div>
+
+                    <div>
+
+                        <ReactModal
+                            isOpen={this.state.showModal}
+                            contentLabel="onRequestClose Example"
+                            onRequestClose={this.handleCloseModal}
+                            className="eventModal"
+                            overlayClassName=""
+                        >
+                            <div className="cust-about-form" id="drinkmodal">
+                                <h3>Search by name or ingredient</h3>
+                                <div className="row rowcenter">
+                                    <div className="col-md-4 ">
+                                        <h2>Name Search</h2>
                                     </div>
-
-
                                 </div>
-                                <div className="col-md-1 " />
-                                <div className="col-md-6 ">
-                                    <h2>Click Large Image To Select</h2>
-                                    {this.state.stuff
-                                        ? <ImageGallery
-                                            ref={i => this._imageGallery = i}
-                                            items={this.state.stuff}
-                                            lazyLoad={false}
-                                            onClick={this._onImageClick.bind(this)}
-                                            infinite={this.state.infinite}
-                                            showBullets={this.state.showBullets}
-                                            showFullscreenButton={this.state.showFullscreenButton && this.state.showGalleryFullscreenButton}
-                                            showPlayButton={this.state.showPlayButton && this.state.showGalleryPlayButton}
-                                            showThumbnails={this.state.showThumbnails}
-                                            showIndex={this.state.showIndex}
-                                            showNav={this.state.showNav}
-                                            thumbnailPosition={this.state.thumbnailPosition}
-                                            additionalClass="app-image-gallery"
-                                        />
-                                        : <div />
-                                    }
+                                <div className="row rowcenter">
+                                    <div className="col-md-1 " />
+                                    <div className="col-md-4 ">
+                                        <div className="row">
+                                            <input type="text" name="drinknamesearch" onChange={this.handleInputChange} placeholder='Drink Name' value={this.state.drinknamesearch} className="col-md-10 pad-lg-0 " />
+                                            <div className="row">
+                                                <div className="col-sm-12 text-center">
+                                                    <a href="" id="namesearch" onClick={this.name_search} className="wpc-upcoming-reg buttonmargin">Search</a>
+                                                    <a href="" id="nameclear" onClick={this.name_clear} className="wpc-upcoming-reg buttonmargin">Clear</a>
+                                                </div>
+                                            </div>
+
+                                            <div className="row rowcenter">
+                                                <div className="col-md-4 ">
+                                                    <h2>Ingredient Search</h2>
+                                                </div>
+                                            </div>
+                                            <div className="demo">
+                                                <PowerSelect
+                                                    options={this.state.option_list}
+                                                    selected={this.state.selectedOption}
+                                                    onChange={this.handleChange}
+                                                    placeholder="Click for options"
+                                                />
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-sm-12 text-center">
+                                                    <a href="" id="ingsearch" onClick={this.ing_search} className="wpc-upcoming-reg buttonmargin ">Search</a>
+                                                    <a href="" id="ingclear" onClick={this.ing_clear} className="wpc-upcoming-reg buttonmargin">Clear</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div className="col-md-1 " />
+                                    <div className="col-md-6 ">
+                                        <h2>Click Large Image To Select</h2>
+                                        {this.state.stuff
+                                            ? <ImageGallery
+                                                ref={i => this._imageGallery = i}
+                                                items={this.state.stuff}
+                                                lazyLoad={false}
+                                                onClick={this._onImageClick.bind(this)}
+                                                infinite={this.state.infinite}
+                                                showBullets={this.state.showBullets}
+                                                showFullscreenButton={this.state.showFullscreenButton && this.state.showGalleryFullscreenButton}
+                                                showPlayButton={this.state.showPlayButton && this.state.showGalleryPlayButton}
+                                                showThumbnails={this.state.showThumbnails}
+                                                showIndex={this.state.showIndex}
+                                                showNav={this.state.showNav}
+                                                thumbnailPosition={this.state.thumbnailPosition}
+                                                additionalClass="app-image-gallery"
+                                            />
+                                            : <div />
+                                        }
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </ReactModal>
+                        </ReactModal>
+                    </div >
                 </div >
             )
         }

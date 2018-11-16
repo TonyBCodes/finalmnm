@@ -3,12 +3,12 @@
     "",
     "\\client",
     "\\client\\public",
+    "\\client\\public\\css",
     "\\client\\src",
-    "\\client\\src\\apis",
     "\\client\\src\\pages",
     "\\models",
     "\\routes"
   ],
-  "SelectedNode": "\\client\\src\\pages\\cust_info.js",
+  "SelectedNode": "\\client\\src\\pages\\event_info.js",
   "PreviewInSolutionExplorer": false
 }
